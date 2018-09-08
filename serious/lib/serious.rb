@@ -19,22 +19,22 @@ puts "CUSTOM"
 
 class Background
   def self.update_is_live
-       stream_response = false
-       begin
-          #create connection
-	  Net::HTTP.start('stream.radiotux.de', 8000, {read_timeout: 5, open_timeout: 5}) {|http|
-             http.read_timeout = 5
-             http.open_timeout = 5
-             response = http.get('/status.xsl')
-              
-	     #get data
-	     stream_response = response.body.include? "binaergewitter.mp3"
-          }
-       rescue Exception => e
-          stream_response = false
-          puts "failed help"
-       end
-       stream_response
+    stream_response = false
+    begin
+      #create connection
+      Net::HTTP.start('stream.radiotux.de', 8000, {read_timeout: 5, open_timeout: 5}) {|http|
+        http.read_timeout = 5
+        http.open_timeout = 5
+        response = http.get('/status.xsl')
+            
+        #get data
+        stream_response = response.body.include? "binaergewitter.mp3"
+      }
+    rescue Exception => e
+      stream_response = false
+    end
+    
+    stream_response
   end
 end
 
